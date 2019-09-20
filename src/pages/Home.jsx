@@ -56,7 +56,7 @@ const Title = styled(TitleContent)`
 `
 
 const LinksWrapper = styled.div`
-  padding-bottom: 8vh;
+  padding-bottom: 7vh;
   width: 86vw;
   margin: 0 auto;
   display: flex;
@@ -69,7 +69,7 @@ const Home = () => {
       <Title>中国省份问问答</Title>
       <LinksWrapper>
         <Leaderboard to="/leaderboard" type="primary">排行榜</Leaderboard>
-        <Start to="/questions" type="primary">开始答题</Start>
+        <Start to="/map" type="primary">开始答题</Start>
       </LinksWrapper>
     </HomeWrapper>
   )

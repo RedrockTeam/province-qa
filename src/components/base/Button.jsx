@@ -8,7 +8,7 @@ import primaryBg from '../../assets/images/primary-button.png'
 const ButtonLink = styled(Link)`
   display: block;
   width: 41vw;
-  line-height: 6vh;
+  line-height: 8.15vh;
   text-align: center;
   font-size: 4.6vw;
   color: #fff;
