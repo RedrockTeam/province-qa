@@ -1,11 +1,13 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import Border from '../components/base/Border.jsx'
 import Button from '../components/base/Button.jsx'
 import UserInfo from '../components/UserInfo.jsx'
 import Board from '../components/Board.jsx'
+import Back from '../components/base/Back.js'
 
-const Back = styled(Button)`
+const BackButton = styled(Button)`
   font-family: coolfont;
   color: #ffc071;
 `
@@ -21,16 +23,17 @@ const BorderWrapper = styled.div`
   align-items: center;
 `
 
-const Leaderboard = () => {
+const Leaderboard = ({ history }) => {
   return (
     <Border>
+      <Back onClick={() => history.goBack()} />
       <BorderWrapper>
         <UserInfo rank={1} name="白开" correct={20} />
         <Board />
-        <Back to="/map" type="primary">返回地图</Back>
+        <BackButton to="/map" type="primary">返回地图</BackButton>
       </BorderWrapper>
     </Border>
   )
 }
 
-export default Leaderboard
+export default withRouter(Leaderboard)
