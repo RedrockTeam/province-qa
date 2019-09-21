@@ -2,12 +2,12 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import Border from '../components/base/Border.jsx'
-import Button from '../components/base/Button.jsx'
+import ButtonLink from '../components/base/ButtonLink.jsx'
 import UserInfo from '../components/UserInfo.jsx'
 import Board from '../components/Board.jsx'
 import Back from '../components/base/Back.js'
 
-const BackButton = styled(Button)`
+const BackLink = styled(ButtonLink)`
   font-family: coolfont;
   color: #ffc071;
 `
@@ -30,7 +30,7 @@ const Leaderboard = ({ history }) => {
       <LeaderboardWrapper>
         <UserInfo rank={1} name="白开" correct={20} />
         <Board />
-        <BackButton to="/map" type="primary">返回地图</BackButton>
+        <BackLink to="/map" type="primary">返回地图</BackLink>
       </LeaderboardWrapper>
     </Border>
   )

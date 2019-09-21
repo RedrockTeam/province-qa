@@ -1,112 +1,47 @@
 import React from 'react'
 import styled from 'styled-components'
-import Button from '../components/base/Button.jsx'
 import introductionBg from '../assets/images/introduction-bg.jpg'
-import 重庆 from '../assets/images/重庆.png'
-import 河南 from '../assets/images/河南.png'
-import 湖北 from '../assets/images/湖北.png'
-import 安徽 from '../assets/images/安徽.png'
-import 海南 from '../assets/images/海南.png'
-import 江苏 from '../assets/images/江苏.png'
-import 江西 from '../assets/images/江西.png'
-import 湖南 from '../assets/images/湖南.png'
-import 贵州 from '../assets/images/贵州.png'
-import 广西 from '../assets/images/广西.png'
-import 广东 from '../assets/images/广东.png'
-import 福建 from '../assets/images/福建.png'
-import 台湾 from '../assets/images/台湾.png'
-import 浙江 from '../assets/images/浙江.png'
-import 宁夏 from '../assets/images/宁夏.png'
-import 上海 from '../assets/images/上海.png'
-import 北京 from '../assets/images/北京.png'
-import 天津 from '../assets/images/天津.png'
-import 澳门 from '../assets/images/澳门.png'
-import 陕西 from '../assets/images/陕西.png'
-import 山西 from '../assets/images/山西.png'
-import 山东 from '../assets/images/山东.png'
-import 河北 from '../assets/images/河北.png'
-import 辽宁 from '../assets/images/辽宁.png'
-import 吉林 from '../assets/images/吉林.png'
-import 黑龙江 from '../assets/images/黑龙江.png'
-import 内蒙古 from '../assets/images/内蒙古.png'
-import 云南 from '../assets/images/云南.png'
-import 四川 from '../assets/images/四川.png'
-import 青海 from '../assets/images/青海.png'
-import 甘肃 from '../assets/images/甘肃.png'
-import 新疆 from '../assets/images/新疆.png'
-import 西藏 from '../assets/images/西藏.png'
-import 香港 from '../assets/images/香港.png'
+import primaryBg from '../assets/images/primary-button.png'
 
-const areaMap = {
-  重庆,
-  河南,
-  湖北,
-  安徽,
-  海南,
-  江苏,
-  江西,
-  湖南,
-  贵州,
-  广西,
-  广东,
-  福建,
-  台湾,
-  浙江,
-  宁夏,
-  上海,
-  北京,
-  天津,
-  澳门,
-  陕西,
-  山西,
-  山东,
-  河北,
-  辽宁,
-  吉林,
-  黑龙江,
-  内蒙古,
-  云南,
-  四川,
-  青海,
-  甘肃,
-  新疆,
-  西藏,
-  香港,
+const introContentMap = {
+  河北: "河北省， 简称“冀”，辖11个地级市，省会石家庄。地处华北、漳河以北，东临渤海、内环京津，西为太行山，北为燕山，燕山以北为张北高原，总面积18.88万平方千米。河北是中华民族的发祥地之一，省级以上文物保护单位达930处，居全国第一位。",  
+  山西: "山西，简称“晋”，又称“三晋”，省会太原市。东依太行山，西、南依吕梁山、黄河，北依古长城，与河北、河南、陕西、内蒙古等省区为界，总面积15.67万平方公里。山西是中华民族发祥地之一，山西有文字记载的历史达三千年，被誉为“华夏文明摇篮”，素有“中国古代文化博物馆”之称。",
+  辽宁: "辽宁，简称\"辽\"，省会沈阳，辖14个地级市，其中副省级城市2个(沈阳、大连)，位于中国东北地区南部，南临黄海、渤海，东与朝鲜一江之隔，与日本、韩国隔海相望，是东北地区唯一的既沿海又沿边的省份，总面积14.8万平方公里。是新中国工业崛起的摇篮，被誉为\"共和国长子\"、\"东方鲁尔\"。",
+  广东: "广东，简称“粤”，省会广州。下辖地级市21个、市辖区65个、县级市20个、县34个、自治县3个。自1989年起，广东国内生产总值连续居全国第一位，成为中国第一经济大省。广东省域经济综合竞争力居全国第一，粤港澳大湾区，更是世界四大湾区之一。",
+  香港: "香港，简称“港”，是中国特别行政区之一。区域范围包括香港岛、九龙、新界和周围262个岛屿。是世界上人口密度最高的地区之一，人均寿命全球第一。同时也是全球最富裕、经济最发达和生活水准最高的地区之一。",
+  澳门: "澳门，简称“澳”，中国特别行政区之一。由澳门半岛和氹仔、路环二岛组成，陆地面积32.8平方公里，总人口65.6万。澳门，是一个国际自由港和世界旅游休闲中心，世界人口密度最高的地区之一，也是世界四大赌城之一，实行资本主义制度。",
+  西藏: "西藏，简称“藏”。西藏自治区，首府拉萨市，位于中华人民共和国西南边陲，是中国五个少数民族自治区之一。西藏位于青藏高原西南部，土地面积约占全国总面积的1/8，平均海拔在4000米以上，素有“世界屋脊”之称。",
+  宁夏: "宁夏，简称“宁”，首府银川。位于中国西北内陆地区，东邻陕西，西、北接内蒙古，南连甘肃，宁夏回族自治区总面积6.64万平方千米。\n宁夏地形从西南向东北逐渐倾斜，丘陵沟壑林立，地形分为三大板块：北部引黄灌区、中部干旱带、南部山区。",
+  新疆: "新疆，简称“新”，首府乌鲁木齐市，位于中国西北边陲，面积166万平方公里，是中国陆地面积最大的省级行政区，占中国国土总面积六分之一。新疆地处亚欧大陆腹地，周边与八国接壤，在历史上是古丝绸之路的重要通道，现在是第二座“亚欧大陆桥”的必经之地。",
+  北京: "北京，简称“京”，是中华人民共和国省级行政区，位于我国华北地区，总面积16410.54平方千米。北京市下辖16个市辖区，是全国的政治、文化中心和国际交往的枢纽，也是一座著名的历史文化名城，与西安、洛阳、开封、南京、杭州并列为中国六大古都。",
+  天津: "天津，简称“津”，始于隋朝大运河的开通，是中国最早的直辖市之一。天津市总面积11916.85平方千米，位于华北平原东北部。天津市下辖16个市辖区，是中国重要的综合性工业基地和商贸中心，同时，其也称“津沽”、“津门”。",
+  上海: "上海，简称“沪”，是中国共产党的诞生地，是中华人民共和国省级行政区、直辖市，国家历史文化名城。上海位于中国华东地区，总面积6340.5平方千米，是国际经济、金融、贸易、航运、科技创新中心。",
+  重庆: "重庆，简称“渝”。地处中国内陆西南部，总面积8.24万平方千米，辖38个县（自治县）。中西部唯一的直辖市，西部大开发重要的战略支点、“一带一路”和长江经济带重要联结点以及内陆开发高地，有火锅之都、中国会展名城、世界温泉之都之称。",
+  台湾: "台湾，简称“台”。位于中国东南海域，总面积3.6万平方公里，由台湾岛和周围属岛以及澎湖列岛两大岛群，共80余个岛屿所组成。制造业与高新技术产业发达，在半导体、IT、通讯、电子精密制造等领域领先全球，是亚洲四小龙之一，有珊瑚王国、茶叶之乡之称。",
+  内蒙古: "内蒙古自治区，简称“内蒙古”。位于中国华北地区，总面积118.3万平方千米，辖9个地级市，3个盟。拥有奇特的自然风光和悠久的历史文化，畜牧业资源、旅游资源、矿产资源十分丰富，有“东林西铁、南粮北牧、遍地矿藏”的美称。",
+  广西: "广西壮族自治区，简称“桂”。位于中国华南地区，陆地面积23.76万平方千米，海域面积约4万平方千米，辖14个地级市。华南通向西南的枢纽，全国唯一的具有沿海、沿江、沿边优势的少数民族自治区，具有丰富的森林资源和矿产资源。",
+  四川: "四川，简称“川”或“蜀”，省会成都，位于中国西南地区内陆，四川省下辖18个省辖市，3个自治州，17个县级市，108个县，4个自治县，54个市辖区。是承接华南华中、连接西南西北、沟通中亚南亚东南亚的重要交汇点和交通走廊。有天府之国之称。",
+  贵州: "贵州，简称“黔”或“贵”，省会贵阳，地处中国西南内陆地区腹地。是中国西南地区交通枢纽，长江经济带重要组成部分。全国首个国家级大数据综合试验区，世界知名山地旅游目的地和山地旅游大省，国家生态文明试验区，内陆开放型经济试验区。",
+  云南: "云南，简称“云”或“滇”，省会昆明。位于中国西南边陲，云南省地跨长江、珠江、元江、澜沧江、怒江、大盈江6大水系。云南气候基本属于亚热带和热带季风气候。",
+  湖北: "湖北，简称“鄂”，是中华人民共和国省级行政区，也是中华民族的始祖炎帝的故里。春秋战国时期的楚国在长达800多年的历史中，在湖北创造了楚文化。",
+  湖南: "湖南省位于我国中部、长江中游，省会长沙。湖南自古盛植木芙蓉，五代时就有“秋风万里芙蓉国”之说，因此又有“芙蓉国”之称。",
+  海南: "海南省，简称琼，别称琼州，位于中国南端。海南经济特区是中国最大的省级经济特区和唯一的省级经济特区，海南岛是仅次于台湾岛的中国第二大岛。",
+  江苏: "江苏，简称“苏”，省会南京，位于中国大陆东部沿海中心，人均国土面积在中国各省区中最少。江苏辖江临海，扼淮控湖，经济繁荣，教育发达，文化昌盛。",
+  吉林: "吉林省简称“吉”，省会长春市，位于中国东北中部，是中国重要的工业基地，加工制造业比较发达，汽车与石化、农产品加工为它的三大支柱产业。",
+  黑龙江: "黑龙江省，简称黑，省会哈尔滨，位于中国最东北部，中国国土的北端与东端均位于省境。 黑龙江东部和北部以乌苏里江黑龙江为界河与俄罗斯为邻，是中国重工业基地。",
+  陕西: "陕西，简称“陕”或“秦”，省会西安。位于西北内陆腹地，横跨黄河和长江两大流域中部，是连接中国东、中部地区和西北、西南的重要枢纽，陕西历史悠久，是中华文明的重要发祥地之一。",
+  青海: "青海为位于中国西部，省会为西宁。境内山脉高耸，地形多样，河流纵横，湖泊棋布。青海有着“世界屋脊”的美称，是长江、黄河、澜沧江的发源地，被誉为“三江源”、“江河源头”、“中华水塔”。",
+  甘肃: "甘肃省，简称甘或陇，中国省级行政单位之一，位于黄河上游，省会为兰州市。甘肃历史跨越八千余年，是中华民族和华夏文明的重要发祥地之一，也是中医药学的发祥地之一，被誉为“河岳根源、羲轩桑梓”。",
+  浙江: "浙江省，简称“浙”。位于中华人民共和国东南沿海地带，属于典型的亚热带季风气候，雨热同期，四季分明。境内地形起伏不一，有“七山一水二分田”的说法。自改革开放以来一直是中国经济最活跃的省份之一，也是中华文明的摇篮之一、吴越文化的发源地之一。",
+  江西: "江西省，简称赣，省会南昌。位于长江中下游南岸，东界浙江与福建、北邻安徽和湖北，西连湖南，南毗广东。全省总面积166946.58平方公里，常住人口4622万。素有“江南鱼米之乡”之美称，也有“世界钨都”、“稀土王国”等美誉，同时也以红色文化驰名中外。",
+  福建: "福建省，简称“闽”。省会福州，位于祖国东南沿海，省陆地总面积12.14万平方千米、海域面积13.6万平方公里。福建依山傍海，多山地丘陵且多被森林所覆盖，使得森林覆盖率达62.96%；陆地海岸线长达3751.5千米，拥有众多岛屿并与宝岛台湾隔海相望。",
 }
-
-const IntroWrapper = styled.div`
-  display: flex;
-  height: calc(100vh - 7vw);
-  padding: 7vh 0 5vh;
-  box-sizing: border-box;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-`
-
-const Area = styled.div`
-  width: 90vw;
-  height: 30vh;
-  background: url(${({ area }) => areaMap[area]}) no-repeat center center/auto 100%;
-`
-
-const ContinueButton = styled(Button)`
-  font-family: coolfont;
-  color: #ffd375;
-`
 
 const Intro = styled.div`
   width: 84vw;
   box-sizing: border-box;
   padding: 4vh 5.6vw;
   background: url(${introductionBg}) no-repeat center center/100% 100%;
-`
-
-const Title = styled.div`
-  color: #aa4538;
-  font-family: coolfont;
-  font-size: 5vw;
 `
 
 const IntroTitle = styled.div`
@@ -123,17 +58,34 @@ const Content = styled.div`
   line-height: 6vw;
 `
 
+const ContinueButton = styled.button`
+  border: none;
+  font-family: coolfont;
+  color: #ffd375;
+  width: 41vw;
+  line-height: 8.15vh;
+  text-align: center;
+  font-size: 4.6vw;
+  color: #fff;
+  background-image: url(${primaryBg});
+  background-size: 100% 100%;
+  text-decoration: none;
+  letter-spacing: 5px;
+  box-shadow: 2px 2px 4px #888;
+  &:hover {
+    filter: brightness(0.9) contrast(110%);
+  }
+`
+
 const Introduction = ({ area }) => {
   return (
-    <IntroWrapper>
-      <Title>{area}</Title>
-      <Area area={area} />
+    <>
       <Intro>
         <IntroTitle>{area}</IntroTitle>
-        <Content>{`湖南省位于我国中部、长江中游，省会长沙。湖南自古盛植木芙蓉，五代时就有“秋风万里芙蓉国”之说，因此又有“芙蓉国”之称。`}</Content>
+        <Content>{introContentMap[area]}</Content>
       </Intro>
-      <ContinueButton type="primary">点击继续</ContinueButton>
-    </IntroWrapper>
+      <ContinueButton onClick={() => console.log(0)}>点击继续</ContinueButton>
+    </>
   )
 }
 

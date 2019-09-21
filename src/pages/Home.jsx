@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import bg from '../assets/images/bg.jpg'
-import Button from '../components/base/Button.jsx'
+import ButtonLink from '../components/base/ButtonLink.jsx'
 
 const HomeWrapper = styled.div`
   width: 100vw;
@@ -12,13 +12,13 @@ const HomeWrapper = styled.div`
   justify-content: space-between;
 `
 
-const Leaderboard = styled(Button)`
+const LeaderboardLink = styled(ButtonLink)`
   color: #ede4e3;
   width: 41vw;
   font-family: 'coolfont';
 `
 
-const Start = styled(Button)`
+const StartLink = styled(ButtonLink)`
   color: #ffc071;
   width: 41vw;
   font-family: 'coolfont';
@@ -68,8 +68,8 @@ const Home = () => {
     <HomeWrapper>
       <Title>中国省份问问答</Title>
       <LinksWrapper>
-        <Leaderboard to="/leaderboard" type="primary">排行榜</Leaderboard>
-        <Start to="/map" type="primary">开始答题</Start>
+        <LeaderboardLink to="/leaderboard" type="primary">排行榜</LeaderboardLink>
+        <StartLink to="/map" type="primary">开始答题</StartLink>
       </LinksWrapper>
     </HomeWrapper>
   )

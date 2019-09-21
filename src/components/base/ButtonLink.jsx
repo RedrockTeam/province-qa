@@ -12,7 +12,7 @@ const ButtonLink = styled(Link)`
   text-align: center;
   font-size: 4.6vw;
   color: #fff;
-  background-image: ${({ bg }) => `url(${bg})`};
+  background-image: url(${({ bg }) => bg});
   background-size: 100% 100%;
   text-decoration: none;
   letter-spacing: 5px;
