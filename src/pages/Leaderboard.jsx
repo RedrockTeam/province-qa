@@ -12,7 +12,7 @@ const BackButton = styled(Button)`
   color: #ffc071;
 `
 
-const BorderWrapper = styled.div`
+const LeaderboardWrapper = styled.div`
   width: 77.6vw;
   height: 82.6vh;
   display: flex;
@@ -27,11 +27,11 @@ const Leaderboard = ({ history }) => {
   return (
     <Border>
       <Back onClick={() => history.goBack()} />
-      <BorderWrapper>
+      <LeaderboardWrapper>
         <UserInfo rank={1} name="白开" correct={20} />
         <Board />
         <BackButton to="/map" type="primary">返回地图</BackButton>
-      </BorderWrapper>
+      </LeaderboardWrapper>
     </Border>
   )
 }

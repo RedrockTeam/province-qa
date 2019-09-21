@@ -7,6 +7,8 @@ const Back = styled.button`
   left: 5.3vw;
   width: 11vw;
   height: 7.6vw;
+  z-index: 1;
+  border: none;
   background: url(${backButton}) no-repeat center center/100% 100%;
 `
 

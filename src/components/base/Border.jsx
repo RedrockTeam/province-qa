@@ -6,6 +6,8 @@ const BorderWrapper = styled.div`
   width: 100vw;
   height: 100vh;
   background: url(${bgBorder}) no-repeat center center/100% 100%;
+  padding: 3.5vw;
+  box-sizing: border-box;
 `
 
 const Border = ({ children }) => (
