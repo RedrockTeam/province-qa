@@ -1,11 +1,12 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 import echarts from 'echarts'
 import 'echarts/map/js/china'
 import geoJson from 'echarts/map/json/china.json'
 
 class ChinaMap extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = { map: null }
   }
   componentDidMount() {
@@ -26,9 +27,9 @@ class ChinaMap extends React.Component {
         itemStyle: {
           normal: {
             label: {
-              show: false,
+              show: true,
               color: '#333',
-              fontSize: 18,
+              fontSize: 12,
             },
             borderWidth: 3,
             borderColor: '#ab4033',
@@ -66,27 +67,32 @@ class ChinaMap extends React.Component {
           { name: '上海', value: 19195.69, selected: true },
           { name: '湖北', value: 19632.26 },
           { name: '湖南', value: 19669.56 },
-          { name: '四川', value: 21026.68 },
-          { name: '辽宁', value: 22226.7 },
-          { name: '河北', value: 24515.76 },
-          { name: '河南', value: 26931.03 },
-          { name: '浙江', value: 32318.85 },
-          { name: '山东', value: 45361.85 },
-          { name: '江苏', value: 49110.27 },
-          { name: '广东', value: 53210.28 },
-          { name: '澳门', value: 53210.28, selected: true },
+          { name: '四川', value: 21026.68, selected: true },
+          { name: '辽宁', value: 22226.7, selected: true },
+          { name: '河北', value: 24515.76, selected: true },
+          { name: '河南', value: 26931.03, selected: true },
+          { name: '浙江', value: 32318.85, selected: true },
+          { name: '山东', value: 45361.85, selected: true },
+          { name: '江苏', value: 49110.27, selected: true },
+          { name: '广东', value: 53210.28, selected: true },
+          { name: '澳门', value: 53210.28 },
+          { name: '香港', value: 53210.28 },
+          { name: '台湾', value: 53210.28, selected: true },
         ],
       }]
     })
     myChart.on('click', (params) => {
-      console.log(params)
+      if (!params.data.selected) {
+        this.props.history.push(`/map/${params.data.name}`)
+      }
     })
   }
+
   render() {
     return (
-      <div ref={this.map} style={{ width: '94vw', height: '90vw' }}></div>
+      <div ref={this.map} style={{ width: '94vw', height: '70vh' }}></div>
     )
   }
 }
 
-export default ChinaMap
+export default withRouter(ChinaMap)

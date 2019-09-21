@@ -7,10 +7,8 @@ import ChinaMap from '../components/ChinaMap.jsx'
 import tipBg from '../assets/images/tip.png'
 
 const MapWrapper = styled.div`
-  height: 86vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   align-items: center;
 `
 
@@ -20,7 +18,7 @@ const Tip = styled.div`
   font-size: 6vw;
   text-align: center;
   font-family: coolfont;
-  color: #fff;
+  color: #f1ebe0;
   background: url(${tipBg}) no-repeat center center/100% 100%;
 `
 
