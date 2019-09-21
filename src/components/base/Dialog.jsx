@@ -5,12 +5,14 @@ import dialogBorder from '../../assets/images/dialog-border.jpg'
 const DialogShadow = styled.div`
   width: 100vw;
   height: 100vh;
-  display: ${({ isShow }) => isShow ? 'flex' : 'none' };
+  display: flex;
   justify-content: center;
   align-items: center;
   position: fixed;
   top: 0;
+  right: 0;
   background: #0004;
+  z-index: 10000;
 `
 
 const DialogBorder = styled.div`
@@ -21,9 +23,9 @@ const DialogBorder = styled.div`
   background: url(${dialogBorder}) no-repeat center center/100% 100%;
 `
 
-const Dialog = ({ isShow, children }) => {
+const Dialog = ({ children }) => {
   return (
-    <DialogShadow isShow={isShow}>
+    <DialogShadow>
       <DialogBorder>
         {children}
       </DialogBorder>

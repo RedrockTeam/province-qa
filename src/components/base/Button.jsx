@@ -10,6 +10,7 @@ const bgMap = {
   dialog: dialogBg,
   primary: primaryBg,
 }
+
 const RouteButton = styled(Link)`
   display: block;
   width: 41vw;
@@ -22,6 +23,7 @@ const RouteButton = styled(Link)`
   text-decoration: none;
   letter-spacing: 5px;
   box-shadow: 2px 2px 4px #888;
+  outline: none;
   &:hover {
     filter: brightness(0.9) contrast(110%);
   }
@@ -40,19 +42,20 @@ const NormalButton = styled.button`
   text-decoration: none;
   letter-spacing: 5px;
   box-shadow: 2px 2px 4px #888;
+  outline: none;
   &:hover {
     filter: brightness(0.9) contrast(110%);
   }
 `
 
-const ButtonLink = ({ type, to, children, onClick, className }) => {
-  const Button = to ? RouteButton : NormalButton
+const Button = ({ type, to, children, onClick, className }) => {
+  const BaseButton = to ? RouteButton : NormalButton
 
   return (
-    <Button bg={bgMap[type]} to={to} onClick={onClick} className={className}>
+    <BaseButton bg={bgMap[type]} to={to} onClick={onClick} className={className}>
       {children}
-    </Button>
+    </BaseButton>
   )
 }
 
-export default ButtonLink
+export default Button

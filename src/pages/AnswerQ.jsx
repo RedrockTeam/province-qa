@@ -2,9 +2,10 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import Border from '../components/base/Border.jsx'
-import ButtonLink from '../components/base/ButtonLink.jsx'
+import Button from '../components/base/Button.jsx'
 import Back from '../components/base/Back.js'
 import Introduction from '../components/Introduction.jsx'
+import GradeDialog from '../components/GradeDialog.jsx'
 import 重庆 from '../assets/images/重庆.png'
 import 河南 from '../assets/images/河南.png'
 import 湖北 from '../assets/images/湖北.png'
@@ -77,10 +78,10 @@ const areaMap = {
   香港,
 }
 
-const IntroWrapper = styled.div`
+const Wrapper = styled.div`
   display: flex;
   height: calc(100vh - 7vw);
-  padding: 7vh 0 5vh;
+  padding: 7vh 0;
   box-sizing: border-box;
   flex-direction: column;
   justify-content: space-between;
@@ -90,7 +91,7 @@ const IntroWrapper = styled.div`
 
 const Area = styled.div`
   width: 90vw;
-  height: 30vh;
+  height: 20vh;
   background: url(${({ area }) => areaMap[area]}) no-repeat center center/auto 100%;
 `
 
@@ -100,16 +101,62 @@ const Title = styled.div`
   font-size: 5vw;
 `
 
+const QAWrapper = styled.div`
+  height: 45vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+`
+
+const Question = styled.div`
+  width: 80vw;
+  text-align: center;
+  font-size: 4vw;
+  color: #252323;
+  &>p {
+    text-align: left;
+    display: inline-block;
+  }
+`
+
+const Answers = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 80vw;
+`
+
+const Answer = styled(Button)`
+  display: inline-block;
+  width: 36vw;
+  line-height: 6vh;
+  font-size: 4vw;
+  letter-spacing: 1px;
+  color: #ffc071;
+  margin: 2vh 0;
+`
+
 const AnswerQ = ({ match, history }) => {
   const area = match.params.area
   return (
     <Border>
       <Back onClick={() => history.goBack()} />
-      <IntroWrapper>
+      <GradeDialog />
+      <Wrapper>
         <Title>{area}</Title>
         <Area area={area} />
-        <Introduction area={area} />
-      </IntroWrapper>
+        {/* <Introduction area={area} /> */}
+        <QAWrapper>
+          <Question><p>重庆，简称“渝”，有————的称号？</p></Question>
+          <Answers>
+            <Answer type="option">火锅之城</Answer>
+            <Answer type="option">火锅之城</Answer>
+            <Answer type="option">火锅之城</Answer>
+            <Answer type="option">火锅之城</Answer>
+          </Answers>
+        </QAWrapper>
+      </Wrapper>
     </Border>
   )
 }

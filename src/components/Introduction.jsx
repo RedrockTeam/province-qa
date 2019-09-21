@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import ButtonLink from '../components/base/ButtonLink.jsx'
+import Button from './base/Button.jsx'
 import introductionBg from '../assets/images/introduction-bg.jpg'
 
 const introContentMap = {
@@ -37,6 +37,14 @@ const introContentMap = {
   福建: "福建省，简称“闽”。省会福州，位于祖国东南沿海，省陆地总面积12.14万平方千米、海域面积13.6万平方公里。福建依山傍海，多山地丘陵且多被森林所覆盖，使得森林覆盖率达62.96%；陆地海岸线长达3751.5千米，拥有众多岛屿并与宝岛台湾隔海相望。",
 }
 
+const IntroWrapper = styled.div`
+  height: 45vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`
+
 const Intro = styled.div`
   width: 84vw;
   box-sizing: border-box;
@@ -58,7 +66,7 @@ const Content = styled.div`
   line-height: 6vw;
 `
 
-const ContinueButton = styled(ButtonLink)`
+const ContinueButton = styled(Button)`
   border: none;
   font-family: coolfont;
   color: #ffd375;
@@ -66,13 +74,13 @@ const ContinueButton = styled(ButtonLink)`
 
 const Introduction = ({ area }) => {
   return (
-    <>
+    <IntroWrapper>
       <Intro>
         <IntroTitle>{area}</IntroTitle>
         <Content>{introContentMap[area]}</Content>
       </Intro>
       <ContinueButton type="primary" onClick={() => console.log(0)}>点击继续</ContinueButton>
-    </>
+    </IntroWrapper>
   )
 }
 

@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Border from '../components/base/Border.jsx'
 import Back from '../components/base/Back.js'
 import ChinaMap from '../components/ChinaMap.jsx'
+import LimitDialog from '../components/LimitDialog.jsx'
 import tipBg from '../assets/images/tip.png'
 
 const MapWrapper = styled.div`
@@ -26,6 +27,7 @@ const Map = ({ history }) => {
   return (
     <Border>
       <Back onClick={() => history.goBack()} />
+      <LimitDialog />
       <MapWrapper>
         <ChinaMap />
         <Tip>点击选择地理区域</Tip>

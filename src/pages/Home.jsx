@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import bg from '../assets/images/bg.jpg'
-import ButtonLink from '../components/base/ButtonLink.jsx'
+import Button from '../components/base/Button.jsx'
 
 const HomeWrapper = styled.div`
   width: 100vw;
@@ -12,13 +12,13 @@ const HomeWrapper = styled.div`
   justify-content: space-between;
 `
 
-const LeaderboardLink = styled(ButtonLink)`
+const LeaderboardLink = styled(Button)`
   color: #ede4e3;
   width: 41vw;
   font-family: 'coolfont';
 `
 
-const StartLink = styled(ButtonLink)`
+const StartLink = styled(Button)`
   color: #ffc071;
   width: 41vw;
   font-family: 'coolfont';

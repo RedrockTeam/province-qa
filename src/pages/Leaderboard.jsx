@@ -2,12 +2,12 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import Border from '../components/base/Border.jsx'
-import ButtonLink from '../components/base/ButtonLink.jsx'
+import Button from '../components/base/Button.jsx'
 import UserInfo from '../components/UserInfo.jsx'
 import Board from '../components/Board.jsx'
 import Back from '../components/base/Back.js'
 
-const BackLink = styled(ButtonLink)`
+const BackLink = styled(Button)`
   font-family: coolfont;
   color: #ffc071;
 `
