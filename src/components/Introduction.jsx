@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import ButtonLink from '../components/base/ButtonLink.jsx'
 import introductionBg from '../assets/images/introduction-bg.jpg'
-import primaryBg from '../assets/images/primary-button.png'
 
 const introContentMap = {
   河北: "河北省， 简称“冀”，辖11个地级市，省会石家庄。地处华北、漳河以北，东临渤海、内环京津，西为太行山，北为燕山，燕山以北为张北高原，总面积18.88万平方千米。河北是中华民族的发祥地之一，省级以上文物保护单位达930处，居全国第一位。",  
@@ -58,23 +58,10 @@ const Content = styled.div`
   line-height: 6vw;
 `
 
-const ContinueButton = styled.button`
+const ContinueButton = styled(ButtonLink)`
   border: none;
   font-family: coolfont;
   color: #ffd375;
-  width: 41vw;
-  line-height: 8.15vh;
-  text-align: center;
-  font-size: 4.6vw;
-  color: #fff;
-  background-image: url(${primaryBg});
-  background-size: 100% 100%;
-  text-decoration: none;
-  letter-spacing: 5px;
-  box-shadow: 2px 2px 4px #888;
-  &:hover {
-    filter: brightness(0.9) contrast(110%);
-  }
 `
 
 const Introduction = ({ area }) => {
@@ -84,7 +71,7 @@ const Introduction = ({ area }) => {
         <IntroTitle>{area}</IntroTitle>
         <Content>{introContentMap[area]}</Content>
       </Intro>
-      <ContinueButton onClick={() => console.log(0)}>点击继续</ContinueButton>
+      <ContinueButton type="primary" onClick={() => console.log(0)}>点击继续</ContinueButton>
     </>
   )
 }
