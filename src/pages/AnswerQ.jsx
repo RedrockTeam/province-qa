@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Border from '../components/base/Border.jsx'
 import Button from '../components/base/Button.jsx'
 import Back from '../components/base/Back.js'
-// import Introduction from '../components/Introduction.jsx'
+import Introduction from '../components/Introduction.jsx'
 import GradeDialog from '../components/GradeDialog.jsx'
 import rightDec from '../assets/images/right.png'
 import wrongDec from '../assets/images/wrong.png'
@@ -42,6 +42,7 @@ import 甘肃 from '../assets/images/甘肃.png'
 import 新疆 from '../assets/images/新疆.png'
 import 西藏 from '../assets/images/西藏.png'
 import 香港 from '../assets/images/香港.png'
+import { API, TOKEN } from '../config.js'
 
 const areaMap = {
   重庆,
@@ -151,6 +152,7 @@ const Dec = styled.div`
 let questionNumber = 0
 
 const AnswerQ = ({ match, history }) => {
+  const [isFirst, setIsFirst] = useState(false)
   const [showDialog, setShowDialog] = useState(false)
   const [questions, setQuestions] = useState([])
   const [question, setQuestion] = useState({})
@@ -160,18 +162,37 @@ const AnswerQ = ({ match, history }) => {
   const area = match.params.area
 
   useEffect(() => {
-    const fetchQuestions = async area => {
-      try {
-        const { message: questions, status } = await fetch(`/mock.json?province=${area}`)
-          .then(res => res.json())
-        if (!status === 1001) {
-          throw new Error('error')
-        }
-        setQuestions(questions)
-        setQuestion(questions[0])
-      } catch (e) {
-        alert(e)
-      }
+    const fetchQuestions = area => {
+      Promise.all([
+        fetch(`${API}/question/get?token=${TOKEN}`, {
+          method: 'POST',
+          body: JSON.stringify({ province: area }),
+          headers: new Headers({
+            'Content-Type': 'application/json'
+          })
+        }),
+        fetch(`${API}/province/first?token=${TOKEN}`, {
+          method: 'POST',
+          body: JSON.stringify({ province: area }),
+          headers: new Headers({
+            'Content-Type': 'application/json'
+          })
+        }),
+      ])
+        .then(res => res.map(r => r.json()))
+        .then(([
+          { message: questions, questionsApiStatus },
+          { first, firstApiStatus },
+        ]) => {
+          if (questionsApiStatus !== 1001 || firstApiStatus !== 1001) {
+            throw new Error('error')
+          }
+
+          setIsFirst(first)
+          setQuestions(questions)
+          setQuestion(questions[0])
+        })
+        .catch(e => alert(e))
     }
 
     fetchQuestions()
@@ -203,35 +224,49 @@ const AnswerQ = ({ match, history }) => {
     }
   }
 
+  const commitAll = (area, rightNum) => {
+    fetch(`${API}/question/up`, {
+      method: 'POST',
+      body: JSON.stringify({ province: area, num: rightNum }),
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    })
+  }
+
   return (
     <Border>
       <Back onClick={() => setShowDialog(true)} />
-      {showDialog && <GradeDialog />}
+      {showDialog && <GradeDialog
+        rightNumber={rightNumber}
+        onCommitAll={() => commitAll(area, rightNumber)}
+      />}
       <Wrapper>
         <Title>{area}</Title>
         <Area area={area} />
-        {/* <Introduction area={area} /> */}
-        <QAWrapper>
-          <Question><p>{question.subject}</p></Question>
-          <Answers>
-            <Answer type="option" onClick={() => commit('A')}>
-              {question.A}
-              {isRightOrNot('A')}
-            </Answer>
-            <Answer type="option" onClick={() => commit('B')}>
-              {question.B}
-              {isRightOrNot('B')}
-            </Answer>
-            <Answer type="option" onClick={() => commit('C')}>
-              {question.C}
-              {isRightOrNot('C')}
-            </Answer>
-            <Answer type="option" onClick={() => commit('D')}>
-              {question.D}
-              {isRightOrNot('D')}
-            </Answer>
-          </Answers>
-        </QAWrapper>
+        {isFirst
+          ? <Introduction area={area} />
+          : <QAWrapper>
+              <Question><p>{question.subject}</p></Question>
+              <Answers>
+                <Answer type="option" onClick={() => commit('A')}>
+                  {question.A}
+                  {isRightOrNot('A')}
+                </Answer>
+                <Answer type="option" onClick={() => commit('B')}>
+                  {question.B}
+                  {isRightOrNot('B')}
+                </Answer>
+                <Answer type="option" onClick={() => commit('C')}>
+                  {question.C}
+                  {isRightOrNot('C')}
+                </Answer>
+                <Answer type="option" onClick={() => commit('D')}>
+                  {question.D}
+                  {isRightOrNot('D')}
+                </Answer>
+              </Answers>
+            </QAWrapper>}
       </Wrapper>
     </Border>
   )

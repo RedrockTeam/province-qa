@@ -50,15 +50,17 @@ const BackButton = styled(Button)`
   color: #ffc288;
 `
 
-const GradeDialog = () => {
+const GradeDialog = ({ rightNumber, onCommitAll }) => {
   return (
     <Dialog>
       <GradeDialogWrapper>
         <Title>成绩公布</Title>
-        <P>恭喜你完成该地区所有题目<br />您共答对3道题目！<br />请继续加油哦～</P>
+        <P>恭喜你完成该地区所有题目<br />您共答对 {rightNumber} 道题目！<br />请继续加油哦～</P>
         <ButtonWrapper>
-          <LeaderboardButton type="dialog" to="/leaderboard">排行榜</LeaderboardButton>
-          <BackButton type="dialog" to="/map">返回地图</BackButton>
+          <LeaderboardButton type="dialog" to="/leaderboard" onClick={onCommitAll}>
+            排行榜
+          </LeaderboardButton>
+          <BackButton type="dialog" to="/map" onClick={onCommitAll}>返回地图</BackButton>
         </ButtonWrapper>
       </GradeDialogWrapper>
     </Dialog>

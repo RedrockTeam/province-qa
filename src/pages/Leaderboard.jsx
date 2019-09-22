@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import Border from '../components/base/Border.jsx'
@@ -6,6 +6,7 @@ import Button from '../components/base/Button.jsx'
 import UserInfo from '../components/UserInfo.jsx'
 import Board from '../components/Board.jsx'
 import Back from '../components/base/Back.js'
+import { API, TOKEN } from '../config.js'
 
 const BackLink = styled(Button)`
   font-family: coolfont;
@@ -24,12 +25,38 @@ const LeaderboardWrapper = styled.div`
 `
 
 const Leaderboard = ({ history }) => {
+  const [rankUsers, setRankUsers] = useState([])
+  const [myself, setMyself] = useState({})
+
+  useEffect(() => {
+    const fetchRank = () => {
+      fetch(`${API}/list/all`)
+        .then(res => res.json())
+        .then(({ message, myself, status }) => {
+          if (status !== 1001) {
+            throw new Error('error')
+          }
+
+          setRankUsers(message)
+          setMyself(myself)
+        })
+        .catch(e => alert(e))
+    }
+
+    fetchRank()
+  }, [])
+
   return (
     <Border>
       <Back onClick={() => history.replace('/')} />
       <LeaderboardWrapper>
-        <UserInfo rank={1} name="白开" correct={20} />
-        <Board />
+        <UserInfo
+          rank={myself.rank}
+          name={myself.username}
+          correct={myself.right_num}
+          avatarUrl={myself.image}
+        />
+        <Board rankUsers={rankUsers} />
         <BackLink to="/map" type="primary">返回地图</BackLink>
       </LeaderboardWrapper>
     </Border>
