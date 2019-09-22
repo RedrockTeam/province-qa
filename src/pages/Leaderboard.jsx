@@ -26,7 +26,7 @@ const LeaderboardWrapper = styled.div`
 const Leaderboard = ({ history }) => {
   return (
     <Border>
-      <Back onClick={() => history.goBack()} />
+      <Back onClick={() => history.replace('/')} />
       <LeaderboardWrapper>
         <UserInfo rank={1} name="白开" correct={20} />
         <Board />

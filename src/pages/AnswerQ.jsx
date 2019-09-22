@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import Border from '../components/base/Border.jsx'
 import Button from '../components/base/Button.jsx'
 import Back from '../components/base/Back.js'
-import Introduction from '../components/Introduction.jsx'
+// import Introduction from '../components/Introduction.jsx'
 import GradeDialog from '../components/GradeDialog.jsx'
+import rightDec from '../assets/images/right.png'
+import wrongDec from '../assets/images/wrong.png'
 import 重庆 from '../assets/images/重庆.png'
 import 河南 from '../assets/images/河南.png'
 import 湖北 from '../assets/images/湖北.png'
@@ -137,23 +139,97 @@ const Answer = styled(Button)`
   margin: 2vh 0;
 `
 
+const Dec = styled.div`
+  width: 13vw;
+  height: 13vw;
+  background: url(${({ isRight }) => isRight ? rightDec : wrongDec}) no-repeat top right/100% 100%;
+  position: absolute;
+  top: 2vw;
+  right: -2vw;
+`
+
+let questionNumber = 0
+
 const AnswerQ = ({ match, history }) => {
+  const [showDialog, setShowDialog] = useState(false)
+  const [questions, setQuestions] = useState([])
+  const [question, setQuestion] = useState({})
+  const [showDec, setShowDec] = useState(false)
+  const [clickedAnswer, setClickedAnswer] = useState('')
+  const [rightNumber, setRightNumber] = useState(0)
   const area = match.params.area
+
+  useEffect(() => {
+    const fetchQuestions = async area => {
+      try {
+        const { message: questions, status } = await fetch(`/mock.json?province=${area}`)
+          .then(res => res.json())
+        if (!status === 1001) {
+          throw new Error('error')
+        }
+        setQuestions(questions)
+        setQuestion(questions[0])
+      } catch (e) {
+        alert(e)
+      }
+    }
+
+    fetchQuestions()
+  }, [])
+
+  const commit = answer => {
+    setShowDec(true)
+    setClickedAnswer(answer)
+    if (question[answer] === question.Answer) {
+      setRightNumber(rightNumber + 1)
+    }
+    setTimeout(() => {
+      questionNumber += 1
+      if (questionNumber >= 5) {
+        setShowDialog(true)
+        questionNumber = 0
+        return
+      }
+      setShowDec(false)
+      setClickedAnswer('')
+      setQuestion(questions[questionNumber])
+    }, 1500)
+  }
+
+  const isRightOrNot = answer => {
+    const isRight = question.Answer === question[answer]
+    if (showDec && (isRight || clickedAnswer === answer)) {
+      return <Dec isRight={isRight} />
+    }
+  }
+
   return (
     <Border>
-      <Back onClick={() => history.goBack()} />
-      <GradeDialog />
+      <Back onClick={() => setShowDialog(true)} />
+      {showDialog && <GradeDialog />}
       <Wrapper>
         <Title>{area}</Title>
         <Area area={area} />
         {/* <Introduction area={area} /> */}
         <QAWrapper>
-          <Question><p>重庆，简称“渝”，有————的称号？</p></Question>
+          <Question><p>{question.subject}</p></Question>
           <Answers>
-            <Answer type="option">火锅之城</Answer>
-            <Answer type="option">火锅之城</Answer>
-            <Answer type="option">火锅之城</Answer>
-            <Answer type="option">火锅之城</Answer>
+            <Answer type="option" onClick={() => commit('A')}>
+              {question.A}
+              {isRightOrNot('A')}
+            </Answer>
+            <Answer type="option" onClick={() => commit('B')}>
+              {question.B}
+              {isRightOrNot('B')}
+            </Answer>
+            <Answer type="option" onClick={() => commit('C')}>
+              {question.C}
+              {isRightOrNot('C')}
+            </Answer>
+            <Answer type="option" onClick={() => commit('D')}>
+              {question.D}
+              {isRightOrNot('D')}
+            </Answer>
           </Answers>
         </QAWrapper>
       </Wrapper>

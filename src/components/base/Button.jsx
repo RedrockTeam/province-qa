@@ -30,6 +30,7 @@ const RouteButton = styled(Link)`
 `
 
 const NormalButton = styled.button`
+  position: relative;
   border: none;
   display: block;
   width: 41vw;
@@ -52,7 +53,7 @@ const Button = ({ type, to, children, onClick, className }) => {
   const BaseButton = to ? RouteButton : NormalButton
 
   return (
-    <BaseButton bg={bgMap[type]} to={to} onClick={onClick} className={className}>
+    <BaseButton bg={bgMap[type]} to={to} onClick={onClick} className={className} replace>
       {children}
     </BaseButton>
   )

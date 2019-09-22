@@ -24,6 +24,7 @@ class ChinaMap extends React.Component {
         type: 'map',
         map: 'china',
         roam: true,
+        top: '24%',
         itemStyle: {
           normal: {
             label: {
@@ -31,7 +32,7 @@ class ChinaMap extends React.Component {
               color: '#333',
               fontSize: 12,
             },
-            borderWidth: 3,
+            borderWidth: 2,
             borderColor: '#ab4033',
             areaColor: 'transparent',
           },
@@ -81,16 +82,21 @@ class ChinaMap extends React.Component {
         ],
       }]
     })
-    myChart.on('click', (params) => {
+    myChart.on('click', async params => {
       if (!params.data.selected) {
-        this.props.history.push(`/map/${params.data.name}`)
+        const canAnswer = await Promise.resolve(true)
+        if (!canAnswer) {
+          this.props.onCanNotAnswer()
+          return
+        }
+        this.props.history.replace(`/map/${params.data.name}`)
       }
     })
   }
 
   render() {
     return (
-      <div ref={this.map} style={{ width: '94vw', height: '70vh' }}></div>
+      <div ref={this.map} style={{ width: '94vw', height: '100%' }}></div>
     )
   }
 }

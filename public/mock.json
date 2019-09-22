@@ -1,0 +1,51 @@
+{
+  "status": 1001,
+  "info": "ok",
+  "message":[
+    {
+      "question_id":1,
+      "subject": "在四川被人们赋予其“富乐之乡”美称的地方是？",
+      "A":"绵阳",
+      "B": "泸州",
+      "C": "官窑",
+      "D": "成都",
+      "Answer":"成都"
+    },
+    {
+      "question_id":2,
+      "subject": "1",
+      "A":"1A",
+      "B": "1B",
+      "C": "1C",
+      "D": "1D",
+      "Answer":"1A"
+    },
+    {
+      "question_id":2,
+      "subject": "2",
+      "A":"2A",
+      "B": "2B",
+      "C": "2C",
+      "D": "2D",
+      "Answer":"2B"
+    },
+    {
+      "question_id":2,
+      "subject": "3",
+      "A":"3A",
+      "B": "3B",
+      "C": "3C",
+      "D": "3D",
+      "Answer":"3C"
+    },
+    {
+      "question_id":2,
+      "subject": "4",
+      "A":"4A",
+      "B": "4B",
+      "C": "4C",
+      "D": "4D",
+      "Answer":"4D"
+    }
+  ]
+}

@@ -28,6 +28,8 @@ const P = styled.div`
 const YesButton = styled(Button)`
   width: 40.5vw;
   line-height: 6.7vh;
+  color: #ffc071;
+  font-family: coolfont;
 `
 
 const LimitDialog = ({ onClick }) => {
@@ -36,7 +38,7 @@ const LimitDialog = ({ onClick }) => {
       <LimitDialogWrapper>
         <Title>您的答题次数已到上限了</Title>
         <P>每天只能回答 20 道题目，不能贪心喔</P>
-        <YesButton type="dialog" onClick={onClick}>我知道了</YesButton>
+        <YesButton type="dialog" onClick={onClick}>我知道啦</YesButton>
       </LimitDialogWrapper>
     </Dialog>
   )

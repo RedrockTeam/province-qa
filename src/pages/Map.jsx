@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import Border from '../components/base/Border.jsx'
@@ -8,12 +8,16 @@ import LimitDialog from '../components/LimitDialog.jsx'
 import tipBg from '../assets/images/tip.png'
 
 const MapWrapper = styled.div`
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 `
 
 const Tip = styled.div`
+  position: absolute;
+  bottom: 16%;
   width: 66.7vw;
   line-height: 17.1vw;
   font-size: 6vw;
@@ -24,12 +28,13 @@ const Tip = styled.div`
 `
 
 const Map = ({ history }) => {
+  const [showDialog, setShowDialog] = useState(false)
   return (
     <Border>
-      <Back onClick={() => history.goBack()} />
-      <LimitDialog />
+      <Back onClick={() => history.replace('/')} />
+      {showDialog && <LimitDialog onClick={() => setShowDialog(false)} />}
       <MapWrapper>
-        <ChinaMap />
+        <ChinaMap onCanNotAnswer={() => setShowDialog(true)} />
         <Tip>点击选择地理区域</Tip>
       </MapWrapper>
     </Border>
