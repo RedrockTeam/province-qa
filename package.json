@@ -2,6 +2,7 @@
   "name": "province-qa",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://wx.redrock.team/game/province-qa/",
   "dependencies": {
     "echarts": "^4.3.0",
     "react": "^16.9.0",

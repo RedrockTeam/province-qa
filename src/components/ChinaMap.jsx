@@ -3,7 +3,9 @@ import { withRouter } from 'react-router-dom'
 import echarts from 'echarts'
 import 'echarts/map/js/china'
 import geoJson from 'echarts/map/json/china.json'
-import { API, TOKEN } from '../config.js'
+import { API } from '../config.js'
+
+const TOKEN = localStorage.getItem('token')
 
 class ChinaMap extends React.Component {
   constructor(props) {
@@ -12,15 +14,20 @@ class ChinaMap extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`${API}/question/done?token=${TOKEN}`)
+    fetch(`${API}/province/done?token=${TOKEN}`)
       .then(res => res.json())
       .then(({ message, status }) => {
         if (status !== 1001) {
           throw new Error('error')
         }
 
-        const data = message.map(d => ({ name: d.name, selected: d.done }))
+        // let isHaiNanSelected
+        const data = message.map(d => {
+          return { name: d.name, selected: d.done === "true" }
+        })
+
         this.map = React.createRef()
+        // data.push({ name: '南海诸岛', selected: isHaiNanSelected })
         this.setState({ map: this.map, data })
       })
       .catch(e => alert(e))
@@ -63,6 +70,7 @@ class ChinaMap extends React.Component {
     })
 
     myChart.on('click', params => {
+      console.log(params)
       if (!params.data.selected) {
         fetch(`${API}/user/done?token=${TOKEN}`)
           .then(res => res.json())
@@ -71,7 +79,7 @@ class ChinaMap extends React.Component {
               throw new Error('error')
             }
 
-            if (!canAnswer) {
+            if (!(canAnswer === "true")) {
               this.props.onCanNotAnswer()
               return
             }

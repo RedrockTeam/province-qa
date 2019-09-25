@@ -72,14 +72,14 @@ const ContinueButton = styled(Button)`
   color: #ffd375;
 `
 
-const Introduction = ({ area }) => {
+const Introduction = ({ area, onClick }) => {
   return (
     <IntroWrapper>
       <Intro>
         <IntroTitle>{area}</IntroTitle>
         <Content>{introContentMap[area]}</Content>
       </Intro>
-      <ContinueButton type="primary" onClick={() => console.log(0)}>点击继续</ContinueButton>
+      <ContinueButton type="primary" onClick={onClick}>点击继续</ContinueButton>
     </IntroWrapper>
   )
 }

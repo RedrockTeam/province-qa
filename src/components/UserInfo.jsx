@@ -18,7 +18,7 @@ const Avatar = styled.div`
   height: 18vw;
   border-radius: 50%;
   border: .5vw solid #ac483b;
-  background-image: url(${({ url }) => url});
+  background: url(${({ url }) => url}) center center/100% 100%;
 `
 
 const Your = styled.div`

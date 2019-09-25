@@ -23,6 +23,7 @@ const RankList = styled.div`
 `
 
 const Board = ({ rankUsers }) => {
+  console.log(rankUsers)
   return (
     <BoardWrapper>
       <BoardHead>
@@ -33,11 +34,11 @@ const Board = ({ rankUsers }) => {
       <RankList>
         {rankUsers.map(u => (
           <RankUser
-            key={u.number}
-            rank={u.number}
-            avatarUrl={u.avatar}
-            name={u.name}
-            correct={u.correct}
+            key={u.rank}
+            rank={u.rank}
+            avatarUrl={u.image}
+            name={u.username}
+            correct={u.right_num}
           />
         ))}
       </RankList>

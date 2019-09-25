@@ -6,7 +6,9 @@ import Button from '../components/base/Button.jsx'
 import UserInfo from '../components/UserInfo.jsx'
 import Board from '../components/Board.jsx'
 import Back from '../components/base/Back.js'
-import { API, TOKEN } from '../config.js'
+import { API } from '../config.js'
+
+const TOKEN = localStorage.getItem('token')
 
 const BackLink = styled(Button)`
   font-family: coolfont;
@@ -30,7 +32,7 @@ const Leaderboard = ({ history }) => {
 
   useEffect(() => {
     const fetchRank = () => {
-      fetch(`${API}/list/all`)
+      fetch(`${API}/list/all?token=${TOKEN}`)
         .then(res => res.json())
         .then(({ message, myself, status }) => {
           if (status !== 1001) {

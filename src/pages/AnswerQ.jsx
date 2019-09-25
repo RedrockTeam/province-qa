@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import Border from '../components/base/Border.jsx'
 import Button from '../components/base/Button.jsx'
@@ -42,7 +41,9 @@ import 甘肃 from '../assets/images/甘肃.png'
 import 新疆 from '../assets/images/新疆.png'
 import 西藏 from '../assets/images/西藏.png'
 import 香港 from '../assets/images/香港.png'
-import { API, TOKEN } from '../config.js'
+import { API } from '../config.js'
+
+const TOKEN = localStorage.getItem('token')
 
 const areaMap = {
   重庆,
@@ -133,6 +134,7 @@ const Answers = styled.div`
 const Answer = styled(Button)`
   display: inline-block;
   width: 36vw;
+  height: 6vh;
   line-height: 6vh;
   font-size: 4vw;
   letter-spacing: 1px;
@@ -151,7 +153,7 @@ const Dec = styled.div`
 
 let questionNumber = 0
 
-const AnswerQ = ({ match, history }) => {
+const AnswerQ = ({ match }) => {
   const [isFirst, setIsFirst] = useState(false)
   const [showDialog, setShowDialog] = useState(false)
   const [questions, setQuestions] = useState([])
@@ -163,26 +165,26 @@ const AnswerQ = ({ match, history }) => {
 
   useEffect(() => {
     const fetchQuestions = area => {
+      console.log(JSON.stringify({ province: area }))
       Promise.all([
         fetch(`${API}/question/get?token=${TOKEN}`, {
           method: 'POST',
-          body: JSON.stringify({ province: area }),
+          body: `province=${area}`,
           headers: new Headers({
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/x-www-form-urlencoded',
           })
-        }),
+        }).then(r => r.json()),
         fetch(`${API}/province/first?token=${TOKEN}`, {
           method: 'POST',
-          body: JSON.stringify({ province: area }),
+          body: `province=${area}`,
           headers: new Headers({
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/x-www-form-urlencoded',
           })
-        }),
+        }).then(r => r.json()),
       ])
-        .then(res => res.map(r => r.json()))
         .then(([
-          { message: questions, questionsApiStatus },
-          { first, firstApiStatus },
+          { message: questions, status: questionsApiStatus },
+          { first, status: firstApiStatus },
         ]) => {
           if (questionsApiStatus !== 1001 || firstApiStatus !== 1001) {
             throw new Error('error')
@@ -195,13 +197,13 @@ const AnswerQ = ({ match, history }) => {
         .catch(e => alert(e))
     }
 
-    fetchQuestions()
-  }, [])
+    fetchQuestions(area)
+  }, [area])
 
   const commit = answer => {
     setShowDec(true)
     setClickedAnswer(answer)
-    if (question[answer] === question.Answer) {
+    if (question[answer] === question.answer) {
       setRightNumber(rightNumber + 1)
     }
     setTimeout(() => {
@@ -218,18 +220,18 @@ const AnswerQ = ({ match, history }) => {
   }
 
   const isRightOrNot = answer => {
-    const isRight = question.Answer === question[answer]
+    const isRight = question.answer === question[answer]
     if (showDec && (isRight || clickedAnswer === answer)) {
       return <Dec isRight={isRight} />
     }
   }
 
   const commitAll = (area, rightNum) => {
-    fetch(`${API}/question/up`, {
+    fetch(`${API}/question/up?token=${TOKEN}`, {
       method: 'POST',
-      body: JSON.stringify({ province: area, num: rightNum }),
+      body: `province=${area}&num=${rightNum}`,
       headers: new Headers({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/x-www-form-urlencoded'
       })
     })
   }
@@ -245,7 +247,7 @@ const AnswerQ = ({ match, history }) => {
         <Title>{area}</Title>
         <Area area={area} />
         {isFirst
-          ? <Introduction area={area} />
+          ? <Introduction area={area} onClick={setIsFirst(false)} />
           : <QAWrapper>
               <Question><p>{question.subject}</p></Question>
               <Answers>
@@ -272,4 +274,4 @@ const AnswerQ = ({ match, history }) => {
   )
 }
 
-export default withRouter(AnswerQ)
+export default AnswerQ
