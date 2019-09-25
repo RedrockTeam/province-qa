@@ -14,10 +14,9 @@ code {
 
 @font-face {
   font-family: 'coolfont';
-  /* src: url('webfont.eot'); IE9 Compat Modes */
-  /* src: url('webfont.eot?#iefix') format('embedded-opentype'), */
-       /* url('webfont.woff2') format('woff2'), */
-       /* url('webfont.woff') format('woff'), */
-  src: url('./assets/fonts/汉仪菱心体简.TTF') format('truetype');
-       /* url('webfont.svg#svgFontName') format('svg'); */
+  src: url('./assets/fonts/ez.eot');
+  src: url('./assets/fonts/ez.eot?#iefix') format('embedded-opentype'),
+       url('./assets/fonts/ez.woff') format('woff'),
+       url('./assets/fonts/ez.TTF') format('truetype'),
+       url('./assets/fonts/ez.svg#svgFontName') format('svg');
 }

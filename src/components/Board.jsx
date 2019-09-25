@@ -23,7 +23,6 @@ const RankList = styled.div`
 `
 
 const Board = ({ rankUsers }) => {
-  console.log(rankUsers)
   return (
     <BoardWrapper>
       <BoardHead>

@@ -8,8 +8,6 @@ import Board from '../components/Board.jsx'
 import Back from '../components/base/Back.js'
 import { API } from '../config.js'
 
-const TOKEN = localStorage.getItem('token')
-
 const BackLink = styled(Button)`
   font-family: coolfont;
   color: #ffc071;
@@ -29,6 +27,7 @@ const LeaderboardWrapper = styled.div`
 const Leaderboard = ({ history }) => {
   const [rankUsers, setRankUsers] = useState([])
   const [myself, setMyself] = useState({})
+  const TOKEN = localStorage.getItem('token')
 
   useEffect(() => {
     const fetchRank = () => {
@@ -46,7 +45,7 @@ const Leaderboard = ({ history }) => {
     }
 
     fetchRank()
-  }, [])
+  }, [TOKEN])
 
   return (
     <Border>

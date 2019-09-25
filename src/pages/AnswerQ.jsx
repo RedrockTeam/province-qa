@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import Border from '../components/base/Border.jsx'
 import Button from '../components/base/Button.jsx'
@@ -42,8 +42,6 @@ import 新疆 from '../assets/images/新疆.png'
 import 西藏 from '../assets/images/西藏.png'
 import 香港 from '../assets/images/香港.png'
 import { API } from '../config.js'
-
-const TOKEN = localStorage.getItem('token')
 
 const areaMap = {
   重庆,
@@ -151,8 +149,6 @@ const Dec = styled.div`
   right: -2vw;
 `
 
-let questionNumber = 0
-
 const AnswerQ = ({ match }) => {
   const [isFirst, setIsFirst] = useState(false)
   const [showDialog, setShowDialog] = useState(false)
@@ -161,11 +157,13 @@ const AnswerQ = ({ match }) => {
   const [showDec, setShowDec] = useState(false)
   const [clickedAnswer, setClickedAnswer] = useState('')
   const [rightNumber, setRightNumber] = useState(0)
+  const questionNumber = useRef(0)
   const area = match.params.area
+  const TOKEN = localStorage.getItem('token')
 
   useEffect(() => {
+
     const fetchQuestions = area => {
-      console.log(JSON.stringify({ province: area }))
       Promise.all([
         fetch(`${API}/question/get?token=${TOKEN}`, {
           method: 'POST',
@@ -198,7 +196,7 @@ const AnswerQ = ({ match }) => {
     }
 
     fetchQuestions(area)
-  }, [area])
+  }, [area, TOKEN])
 
   const commit = answer => {
     setShowDec(true)
@@ -207,15 +205,15 @@ const AnswerQ = ({ match }) => {
       setRightNumber(rightNumber + 1)
     }
     setTimeout(() => {
-      questionNumber += 1
-      if (questionNumber >= 5) {
+      questionNumber.current += 1
+      if (questionNumber.current >= 5) {
         setShowDialog(true)
-        questionNumber = 0
+        questionNumber.current = 0
         return
       }
       setShowDec(false)
       setClickedAnswer('')
-      setQuestion(questions[questionNumber])
+      setQuestion(questions[questionNumber.current])
     }, 1500)
   }
 

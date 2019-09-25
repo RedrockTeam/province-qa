@@ -37,7 +37,7 @@ function checkToken() {
       }
     }
   }
-  const rushbUrl = encodeURI(`${API}/user/done`)
+  const rushbUrl = encodeURI(`${API}/user/token`)
   window.location.href = 'https://wx.redrock.team/magicloop/rushb?b=' + rushbUrl + '&scope=student'
 }
 

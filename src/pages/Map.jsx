@@ -9,14 +9,13 @@ import tipBg from '../assets/images/tip.png'
 
 const MapWrapper = styled.div`
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   position: relative;
 `
 
 const Tip = styled.div`
   position: absolute;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
   bottom: 16%;
   width: 66.7vw;
   line-height: 17.1vw;

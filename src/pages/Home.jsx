@@ -69,7 +69,7 @@ const Home = () => {
       <Title>中国省份问问答</Title>
       <LinksWrapper>
         <LeaderboardLink to="/leaderboard" type="primary">排行榜</LeaderboardLink>
-        <StartLink to="/map" type="primary">开始答题</StartLink>
+        <StartLink to="/map" type="primary">我要参与</StartLink>
       </LinksWrapper>
     </HomeWrapper>
   )

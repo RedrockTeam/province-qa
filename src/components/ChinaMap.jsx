@@ -5,16 +5,15 @@ import 'echarts/map/js/china'
 import geoJson from 'echarts/map/json/china.json'
 import { API } from '../config.js'
 
-const TOKEN = localStorage.getItem('token')
-
 class ChinaMap extends React.Component {
   constructor(props) {
     super(props)
     this.state = { map: null, data: {} }
+    this.TOKEN = localStorage.getItem('token')
   }
 
   componentDidMount() {
-    fetch(`${API}/province/done?token=${TOKEN}`)
+    fetch(`${API}/province/done?token=${this.TOKEN}`)
       .then(res => res.json())
       .then(({ message, status }) => {
         if (status !== 1001) {
@@ -72,7 +71,7 @@ class ChinaMap extends React.Component {
     myChart.on('click', params => {
       console.log(params)
       if (!params.data.selected) {
-        fetch(`${API}/user/done?token=${TOKEN}`)
+        fetch(`${API}/user/done?token=${this.TOKEN}`)
           .then(res => res.json())
           .then(({ answer: canAnswer, status }) => {
             if (status !== 1001) {
@@ -84,7 +83,12 @@ class ChinaMap extends React.Component {
               return
             }
 
-            this.props.history.replace(`/map/${params.data.name}`)
+            let area = params.data.name
+            if (area === '南海诸岛') {
+              area = '海南'
+            }
+
+            this.props.history.replace(`/map/${area}`)
           })
           .catch(e => alert(e))
       }
