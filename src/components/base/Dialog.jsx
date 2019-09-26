@@ -11,7 +11,7 @@ const DialogShadow = styled.div`
   position: fixed;
   top: 0;
   right: 0;
-  background: #0004;
+  background: rgba(0, 0, 0, .4);
   z-index: 10000;
 `
 

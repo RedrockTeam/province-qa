@@ -245,7 +245,7 @@ const AnswerQ = ({ match }) => {
         <Title>{area}</Title>
         <Area area={area} />
         {isFirst
-          ? <Introduction area={area} onClick={setIsFirst(false)} />
+          ? <Introduction area={area} onClick={() => setIsFirst(false)} />
           : <QAWrapper>
               <Question><p>{question.subject}</p></Question>
               <Answers>
