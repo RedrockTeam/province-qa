@@ -49,11 +49,18 @@ const NormalButton = styled.button`
   } */
 `
 
-const Button = ({ type, to, children, onClick, className }) => {
+const Button = ({ type, to, children, onClick, className, disabled }) => {
   const BaseButton = to ? RouteButton : NormalButton
 
   return (
-    <BaseButton bg={bgMap[type]} to={to} onClick={onClick} className={className} replace>
+    <BaseButton
+      bg={bgMap[type]}
+      to={to}
+      onClick={onClick}
+      className={className}
+      disabled={disabled}
+      replace
+    >
       {children}
     </BaseButton>
   )

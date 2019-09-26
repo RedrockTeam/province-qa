@@ -24,6 +24,45 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+    <script>
+      const API = 'https://cyxbsmobile.redrock.team/wxapi/questionProvince'
+      // token 检测
+      function checkToken() {
+        let jwt = localStorage.getItem('token')
+        if (jwt) {
+          if (window.location.href.split('?').length > 1) {
+            const params = window.location.href.split('?')[1].split('&')
+            for (let i = 0; i < params.length; i += 1) {
+              if (params[i].indexOf('token') > -1) {
+                jwt = params[i].replace('token=', '')
+                localStorage.setItem('token', jwt)
+                const realUrl = window.location.href.split('?')[0]
+                window.location.href = realUrl
+                return
+              }
+            }
+          }
+          return
+        } else {
+          if (window.location.href.split('?').length > 1) {
+            const params = window.location.href.split('?')[1].split('&')
+            for (let i = 0; i < params.length; i += 1) {
+              if (params[i].indexOf('token') > -1) {
+                jwt = params[i].replace('token=', '')
+                localStorage.setItem('token', jwt)
+                const realUrl = window.location.href.split('?')[0]
+                window.location.href = realUrl
+                return
+              }
+            }
+          }
+        }
+        const rushbUrl = encodeURI(`${API}/user/token`)
+        window.location.href = 'https://wx.redrock.team/magicloop/rushb?b=' + rushbUrl + '&scope=student'
+      }
+      
+      checkToken()
+    </script>
     <title>省份问问答 | 2019 国庆</title>
   </head>
   <body>

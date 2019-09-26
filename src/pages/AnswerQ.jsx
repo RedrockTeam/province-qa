@@ -201,9 +201,11 @@ const AnswerQ = ({ match }) => {
   const commit = answer => {
     setShowDec(true)
     setClickedAnswer(answer)
+
     if (question[answer] === question.answer) {
       setRightNumber(rightNumber + 1)
     }
+
     setTimeout(() => {
       questionNumber.current += 1
       if (questionNumber.current >= 5) {
@@ -211,10 +213,11 @@ const AnswerQ = ({ match }) => {
         questionNumber.current = 0
         return
       }
+
       setShowDec(false)
       setClickedAnswer('')
       setQuestion(questions[questionNumber.current])
-    }, 1500)
+    }, 1000)
   }
 
   const isRightOrNot = answer => {
@@ -249,19 +252,35 @@ const AnswerQ = ({ match }) => {
           : <QAWrapper>
               <Question><p>{question.subject}</p></Question>
               <Answers>
-                <Answer type="option" onClick={() => commit('A')}>
+                <Answer
+                  type="option"
+                  onClick={() => commit('A')}
+                  disabled={showDec}
+                >
                   {question.A}
                   {isRightOrNot('A')}
                 </Answer>
-                <Answer type="option" onClick={() => commit('B')}>
+                <Answer
+                  type="option"
+                  onClick={() => commit('B')}
+                  disabled={showDec}
+                >
                   {question.B}
                   {isRightOrNot('B')}
                 </Answer>
-                <Answer type="option" onClick={() => commit('C')}>
+                <Answer
+                  type="option"
+                  onClick={() => commit('C')}
+                  disabled={showDec}
+                >
                   {question.C}
                   {isRightOrNot('C')}
                 </Answer>
-                <Answer type="option" onClick={() => commit('D')}>
+                <Answer
+                  type="option"
+                  onClick={() => commit('D')}
+                  disabled={showDec}
+                >
                   {question.D}
                   {isRightOrNot('D')}
                 </Answer>
