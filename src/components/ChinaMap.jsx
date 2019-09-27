@@ -1,7 +1,8 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import echarts from 'echarts'
-import 'echarts/map/js/china'
+// import 'echarts/map/js/china'
+import '../assets/china'
 import geoJson from 'echarts/map/json/china.json'
 import { API } from '../config.js'
 
