@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import Border from '../components/base/Border.jsx'
 import Button from '../components/base/Button.jsx'
@@ -149,7 +150,7 @@ const Dec = styled.div`
   right: -2vw;
 `
 
-const AnswerQ = ({ match }) => {
+const AnswerQ = ({ match, history }) => {
   const [isFirst, setIsFirst] = useState(false)
   const [showDialog, setShowDialog] = useState(false)
   const [questions, setQuestions] = useState([])
@@ -239,7 +240,7 @@ const AnswerQ = ({ match }) => {
 
   return (
     <Border>
-      <Back onClick={() => setShowDialog(true)} />
+      <Back onClick={() => history.replace('/map')} />
       {showDialog && <GradeDialog
         rightNumber={rightNumber}
         onCommitAll={() => commitAll(area, rightNumber)}
@@ -291,4 +292,4 @@ const AnswerQ = ({ match }) => {
   )
 }
 
-export default AnswerQ
+export default withRouter(AnswerQ)
