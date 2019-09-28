@@ -52,7 +52,7 @@ class ChinaMap extends React.Component {
         itemStyle: {
           normal: {
             label: {
-              show: true,
+              show: this.props.zoom > 5,
               color: '#333',
               fontSize: 12,
             },
@@ -86,7 +86,7 @@ class ChinaMap extends React.Component {
         itemStyle: {
           normal: {
             label: {
-              show: true,
+              show: false,
               color: '#333',
               fontSize: 12,
             },
