@@ -218,14 +218,14 @@ const AnswerQ = ({ match, history }) => {
     }
 
     setTimeout(() => {
-      if (questionNumber.current < 4) {
-        questionNumber.current += 1
-      }
-
       if (questionNumber.current >= 4) {
         setShowDialog(true)
         questionNumber.current = 0
         return
+      }
+
+      if (questionNumber.current < 4) {
+        questionNumber.current += 1
       }
 
       setShowDec(false)
