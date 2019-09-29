@@ -27,15 +27,13 @@ const Your = styled.div`
   color: #a93828;
 `
 
-const UserInfo = ({ rank, avatarUrl, name, correct }) => {
-  return (
-    <UserInfoWrapper>
-      <Avatar url={avatarUrl} />
-      <Name>{name}</Name>
-      <Your>我的排名：NO.{rank}</Your>
-      <Your>累计答题正确数：{correct}题</Your>
-    </UserInfoWrapper>
-  )
-}
+const UserInfo = ({ rank, avatarUrl, name, correct }) => (
+  <UserInfoWrapper>
+    <Avatar url={avatarUrl} />
+    <Name>{name}</Name>
+    <Your>我的排名：NO.{rank}</Your>
+    <Your>累计答题正确数：{correct}题</Your>
+  </UserInfoWrapper>
+)
 
 export default UserInfo

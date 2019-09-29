@@ -10,7 +10,7 @@ class ChinaMap extends React.Component {
   constructor(props) {
     super(props)
     this.state = { map: null, data: {} }
-    this.TOKEN = localStorage.getItem('token')
+    this.TOKEN = localStorage.getItem('token-province-qa')
     this.map = React.createRef()
   }
 
@@ -61,6 +61,11 @@ class ChinaMap extends React.Component {
             areaColor: 'transparent',
           },
           emphasis: {
+            label: {
+              show: this.props.zoom > 5,
+              color: '#333',
+              fontSize: 12,
+            },
             areaColor: '#f3af59',
           }
         },
@@ -95,6 +100,11 @@ class ChinaMap extends React.Component {
             areaColor: 'transparent',
           },
           emphasis: {
+            label: {
+              show: false,
+              color: '#333',
+              fontSize: 12,
+            },
             areaColor: '#f3af59',
           }
         },
@@ -115,7 +125,7 @@ class ChinaMap extends React.Component {
               throw new Error('error')
             }
 
-            if (!(canAnswer === "true")) {
+            if (canAnswer !== "true") {
               this.props.onCanNotAnswer()
               return
             }

@@ -33,7 +33,7 @@ const Tip = styled.div`
 `
 
 const ZoomButton = styled.button`
-  width: 8.9vw;
+  width: 5.57vh;
   height: 4.57vh;
   position: absolute;
   top: 2.4vw;

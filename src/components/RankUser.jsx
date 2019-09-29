@@ -52,17 +52,15 @@ const Correct = styled.div`
   text-align: center;
 `
 
-const RankUser = ({ rank, avatarUrl, name, correct }) => {
-  return (
-    <RankUserWrapper>
-      <Number isTopThree={rank <= 3}>{rank}</Number>
-      <Username>
-        <Avatar url={avatarUrl} />
-        <Name>{name}</Name>
-      </Username>
-      <Correct>{correct}</Correct>
-    </RankUserWrapper>
-  )
-}
+const RankUser = ({ rank, avatarUrl, name, correct }) => (
+  <RankUserWrapper>
+    <Number isTopThree={rank <= 3}>{rank}</Number>
+    <Username>
+      <Avatar url={avatarUrl} />
+      <Name>{name}</Name>
+    </Username>
+    <Correct>{correct}</Correct>
+  </RankUserWrapper>
+)
 
 export default RankUser

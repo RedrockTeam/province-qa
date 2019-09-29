@@ -14,12 +14,14 @@ const HomeWrapper = styled.div`
 
 const LeaderboardLink = styled(Button)`
   color: #ede4e3;
+  text-indent: 5px;
   width: 41vw;
   font-family: 'coolfont';
 `
 
 const StartLink = styled(Button)`
   color: #ffc071;
+  text-indent: 5px;
   width: 41vw;
   font-family: 'coolfont';
 `
@@ -63,16 +65,14 @@ const LinksWrapper = styled.div`
   justify-content: space-between;
 `
 
-const Home = () => {
-  return (
-    <HomeWrapper>
-      <Title>中国省份问问答</Title>
-      <LinksWrapper>
-        <LeaderboardLink to="/leaderboard" type="primary">排行榜</LeaderboardLink>
-        <StartLink to="/map" type="primary">我要参与</StartLink>
-      </LinksWrapper>
-    </HomeWrapper>
-  )
-}
+const Home = () => (
+  <HomeWrapper>
+    <Title>中国省份问问答</Title>
+    <LinksWrapper>
+      <LeaderboardLink to="/leaderboard" type="primary">排行榜</LeaderboardLink>
+      <StartLink to="/map" type="primary">我要参与</StartLink>
+    </LinksWrapper>
+  </HomeWrapper>
+)
 
 export default Home

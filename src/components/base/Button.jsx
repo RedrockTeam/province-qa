@@ -24,13 +24,9 @@ const RouteButton = styled(Link)`
   letter-spacing: 5px;
   box-shadow: 2px 2px 4px #888;
   outline: none;
-  /* &:hover {
-    filter: brightness(0.9) contrast(110%);
-  } */
 `
 
 const NormalButton = styled.button`
-  position: relative;
   border: none;
   display: block;
   width: 41vw;
@@ -44,9 +40,6 @@ const NormalButton = styled.button`
   letter-spacing: 5px;
   box-shadow: 2px 2px 4px #888;
   outline: none;
-  /* &:hover {
-    filter: brightness(0.9) contrast(110%);
-  } */
 `
 
 const Button = ({ type, to, children, onClick, className, disabled }) => {

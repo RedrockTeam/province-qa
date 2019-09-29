@@ -32,16 +32,14 @@ const YesButton = styled(Button)`
   font-family: coolfont;
 `
 
-const LimitDialog = ({ onClick }) => {
-  return (
-    <Dialog>
-      <LimitDialogWrapper>
-        <Title>您的答题次数已到上限了</Title>
-        <P>每天只能回答 20 道题目，不能贪心喔</P>
-        <YesButton type="dialog" onClick={onClick}>我知道啦</YesButton>
-      </LimitDialogWrapper>
-    </Dialog>
-  )
-}
+const LimitDialog = ({ onClick }) => (
+  <Dialog>
+    <LimitDialogWrapper>
+      <Title>您的答题次数已到上限了</Title>
+      <P>每天只能回答 20 道题目，不能贪心喔</P>
+      <YesButton type="dialog" onClick={onClick}>我知道啦</YesButton>
+    </LimitDialogWrapper>
+  </Dialog>
+)
 
 export default LimitDialog

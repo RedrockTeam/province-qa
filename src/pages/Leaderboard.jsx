@@ -27,7 +27,7 @@ const LeaderboardWrapper = styled.div`
 const Leaderboard = ({ history }) => {
   const [rankUsers, setRankUsers] = useState([])
   const [myself, setMyself] = useState({})
-  const TOKEN = localStorage.getItem('token')
+  const TOKEN = localStorage.getItem('token-province-qa')
 
   useEffect(() => {
     const fetchRank = () => {

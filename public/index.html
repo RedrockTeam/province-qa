@@ -7,7 +7,7 @@
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="2019 国庆省份问问答"
+      content="2019 国庆中国省份问问答"
     />
     <link rel="apple-touch-icon" href="logo192.png" />
     <!--
@@ -28,14 +28,14 @@
       const API = 'https://cyxbsmobile.redrock.team/wxapi/questionProvince'
       // token 检测
       function checkToken() {
-        let jwt = localStorage.getItem('token')
+        let jwt = localStorage.getItem('token-province-qa')
         if (jwt) {
           if (window.location.href.split('?').length > 1) {
             const params = window.location.href.split('?')[1].split('&')
             for (let i = 0; i < params.length; i += 1) {
               if (params[i].indexOf('token') > -1) {
                 jwt = params[i].replace('token=', '')
-                localStorage.setItem('token', jwt)
+                localStorage.setItem('token-province-qa', jwt)
                 const realUrl = window.location.href.split('?')[0]
                 window.location.href = realUrl
                 return
@@ -49,7 +49,7 @@
             for (let i = 0; i < params.length; i += 1) {
               if (params[i].indexOf('token') > -1) {
                 jwt = params[i].replace('token=', '')
-                localStorage.setItem('token', jwt)
+                localStorage.setItem('token-province-qa', jwt)
                 const realUrl = window.location.href.split('?')[0]
                 window.location.href = realUrl
                 return
@@ -63,20 +63,10 @@
       
       checkToken()
     </script>
-    <title>省份问问答 | 2019 国庆</title>
+    <title>中国省份问问答</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
   </body>
 </html>

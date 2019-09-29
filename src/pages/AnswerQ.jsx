@@ -107,6 +107,7 @@ const Title = styled.div`
 const QAWrapper = styled.div`
   height: 45vh;
   display: flex;
+  visibility: ${({ show }) => show ? 'visible' : 'hidden'};
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
@@ -139,6 +140,7 @@ const Answer = styled(Button)`
   letter-spacing: 1px;
   color: #ffc071;
   margin: 2vh 0;
+  position: relative;
 `
 
 const Dec = styled.div`
@@ -150,7 +152,15 @@ const Dec = styled.div`
   right: -2vw;
 `
 
+const Number = styled.div`
+  position: absolute;
+  bottom: 7vw;
+  font-family: coolfont;
+  font-size: 4vw;
+`
+
 const AnswerQ = ({ match, history }) => {
+  const [show, setShow] = useState(false)
   const [isFirst, setIsFirst] = useState(false)
   const [showDialog, setShowDialog] = useState(false)
   const [questions, setQuestions] = useState([])
@@ -160,10 +170,9 @@ const AnswerQ = ({ match, history }) => {
   const [rightNumber, setRightNumber] = useState(0)
   const questionNumber = useRef(0)
   const area = match.params.area
-  const TOKEN = localStorage.getItem('token')
+  const TOKEN = localStorage.getItem('token-province-qa')
 
   useEffect(() => {
-
     const fetchQuestions = area => {
       Promise.all([
         fetch(`${API}/question/get?token=${TOKEN}`, {
@@ -189,6 +198,7 @@ const AnswerQ = ({ match, history }) => {
             throw new Error('error')
           }
 
+          setShow(true)
           setIsFirst(first)
           setQuestions(questions)
           setQuestion(questions[0])
@@ -208,7 +218,10 @@ const AnswerQ = ({ match, history }) => {
     }
 
     setTimeout(() => {
-      questionNumber.current += 1
+      if (questionNumber.current < 5) {
+        questionNumber.current += 1
+      }
+
       if (questionNumber.current >= 5) {
         setShowDialog(true)
         questionNumber.current = 0
@@ -250,7 +263,7 @@ const AnswerQ = ({ match, history }) => {
         <Area area={area} />
         {isFirst
           ? <Introduction area={area} onClick={() => setIsFirst(false)} />
-          : <QAWrapper>
+          : <QAWrapper show={show}>
               <Question><p>{question.subject}</p></Question>
               <Answers>
                 <Answer
@@ -287,6 +300,7 @@ const AnswerQ = ({ match, history }) => {
                 </Answer>
               </Answers>
             </QAWrapper>}
+          {!isFirst && show && <Number>{questionNumber.current + 1} / 5</Number>}
       </Wrapper>
     </Border>
   )

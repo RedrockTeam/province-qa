@@ -22,27 +22,25 @@ const RankList = styled.div`
   padding: 1vh 0;
 `
 
-const Board = ({ rankUsers }) => {
-  return (
-    <BoardWrapper>
-      <BoardHead>
-        <span>排名</span>
-        <span>昵称</span>
-        <span>正确数</span>
-      </BoardHead>
-      <RankList>
-        {rankUsers.map(u => (
-          <RankUser
-            key={u.rank}
-            rank={u.rank}
-            avatarUrl={u.image}
-            name={u.username}
-            correct={u.right_num}
-          />
-        ))}
-      </RankList>
-    </BoardWrapper>
-  )
-}
+const Board = ({ rankUsers }) => (
+  <BoardWrapper>
+    <BoardHead>
+      <span>排名</span>
+      <span>昵称</span>
+      <span>正确数</span>
+    </BoardHead>
+    <RankList>
+      {rankUsers.map(u => (
+        <RankUser
+          key={u.rank}
+          rank={u.rank}
+          avatarUrl={u.image}
+          name={u.username}
+          correct={u.right_num}
+        />
+      ))}
+    </RankList>
+  </BoardWrapper>
+)
 
 export default Board

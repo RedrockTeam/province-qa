@@ -29,14 +29,12 @@ const DialogBorder = styled.div`
   animation: ${popup} .3s none;
 `
 
-const Dialog = ({ children }) => {
-  return (
-    <DialogShadow>
-      <DialogBorder>
-        {children}
-      </DialogBorder>
-    </DialogShadow>
-  )
-}
+const Dialog = ({ children }) => (
+  <DialogShadow>
+    <DialogBorder>
+      {children}
+    </DialogBorder>
+  </DialogShadow>
+)
 
 export default Dialog
