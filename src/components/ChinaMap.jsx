@@ -125,10 +125,10 @@ class ChinaMap extends React.Component {
               throw new Error('error')
             }
 
-            // if (canAnswer !== "true") {
-            //   this.props.onCanNotAnswer()
-            //   return
-            // }
+            if (canAnswer !== "true") {
+              this.props.onCanNotAnswer()
+              return
+            }
 
             let area = params.data.name
             if (area === '南海诸岛') {
