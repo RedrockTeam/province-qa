@@ -2,6 +2,8 @@
 
 ## 说明
 
+[说明文档](./README.assets/explan.md)
+
 GitHub 仓库：[https://github.com/RedrockTeam/province-qa](https://github.com/RedrockTeam/province-qa)
 
 部署地址：[https://wx.redrock.team/game/province-qaq/](https://wx.redrock.team/game/province-qaq/)
